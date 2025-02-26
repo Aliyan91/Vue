@@ -1,10 +1,11 @@
 <script setup>
 import jobData from "@/jobs.json";
-import { ref,computed } from "vue";
+import { ref,computed, onMounted } from "vue";
 import list from "./list.vue";
 import { RouterLink } from "vue-router";
+import axios from "axios";
 
-const jobs = ref(jobData);
+const jobs = ref([]);
 console.log(jobs.value);
 defineProps({
     limit: Number,
@@ -13,6 +14,15 @@ defineProps({
         default: false
     }
 });
+
+onMounted(async()=>{
+  try{
+    const res=await axios.get("/api/jobs");
+    jobs.value=res.data;
+  }catch(error){
+    console.log("Error");
+  }
+})
 
 
 </script>
