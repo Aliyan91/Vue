@@ -1,9 +1,10 @@
 <script setup>
    
     import BackButton from '@/components/BackButton.vue';
-import axios from 'axios';
+    import axios from 'axios';
     import {reactive,onMounted } from 'vue';
-    import { useRoute,RouterLink } from 'vue-router';
+    import { useRoute,RouterLink,useRouter } from 'vue-router';
+
 
     const route=useRoute();
 
@@ -44,7 +45,7 @@ import axios from 'axios';
                 <i
                   class="fa-solid fa-location-dot text-lg text-orange-700 mr-2"
                 ></i>
-                <p class="text-orange-700">{{ state.job.locaion }}</p>
+                <p class="text-orange-700">{{ state.job.location }}</p>
               </div>
             </div>
 
@@ -72,7 +73,7 @@ import axios from 'axios';
               <h2 class="text-2xl">{{ state.job.company.name }}</h2>
 
               <p class="my-2">
-                {{ state }}
+                {{ state.job.company.description }}
               </p>
 
               <hr class="my-4" />
@@ -85,7 +86,7 @@ import axios from 'axios';
 
               <h3 class="text-xl">Contact Phone:</h3>
 
-              <p class="my-2 bg-green-100 p-2 font-bold">{{ state.job.company.contactNumber }}</p>
+              <p class="my-2 bg-green-100 p-2 font-bold">{{ state.job.company.contactPhone }}</p>
             </div>
 
             <!-- Manage -->
@@ -97,7 +98,7 @@ import axios from 'axios';
                 >Edit Job</RouterLink
               >
               <button
-                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                @click="deletejob" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
               >
                 Delete Job
               </button>
